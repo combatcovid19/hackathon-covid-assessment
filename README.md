@@ -1,2 +1,2 @@
 # hackathon-covid-assessment
-Hackathon Covid Assessment
+Hackathon Covid Assessment Service
