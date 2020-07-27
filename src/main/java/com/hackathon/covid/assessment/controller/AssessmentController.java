@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hackathon.covid.assessment.entities.Provider;
 import com.hackathon.covid.assessment.model.AssesseProfile;
 import com.hackathon.covid.assessment.model.AssessmentAnswer;
 import com.hackathon.covid.assessment.model.AssessmentAnswerInfo;
+import com.hackathon.covid.assessment.model.AssessmentScoreAndProviders;
 import com.hackathon.covid.assessment.model.Assessment_Questionnaire;
 import com.hackathon.covid.assessment.model.CountryCodesAndNames;
+import com.hackathon.covid.assessment.model.Provider_Model;
 import com.hackathon.covid.assessment.model.StateCodesAndNames;
 import com.hackathon.covid.assessment.repo.AssessmentRepo;
 import com.hackathon.covid.assessment.service.AssessmentService;
@@ -36,6 +40,8 @@ import lombok.extern.slf4j.Slf4j;
  * @author HCL Technologies
  *
  */
+
+@CrossOrigin(origins = "http://localhost:8000")
 @RestController
 @RequestMapping(value = "/assessment", produces = "application/json")
 @Api(value = "/assessment")
@@ -125,32 +131,92 @@ public class AssessmentController {
 		return responseEntity;
 	}
 
-	@ApiOperation(value = "This API save answers given by assesse for the questionnaire.", notes = "This API save answers given by assesse for the questionnaire.", response = String.class)
+	/*
+	 * @ApiOperation(value =
+	 * "This API save answers given by assesse for the questionnaire.", notes =
+	 * "This API save answers given by assesse for the questionnaire.", response =
+	 * String.class)
+	 * 
+	 * @ApiResponses({
+	 * 
+	 * @ApiResponse(code = 200, message =
+	 * "Successfully Saved Assessment Answers in DataStore", response =
+	 * String.class),
+	 * 
+	 * @ApiResponse(code = 404, message = "Invalid", response = Object.class),
+	 * 
+	 * @ApiResponse(code = 500, message = "Internal error", response = Object.class)
+	 * })
+	 * 
+	 * @PostMapping(value = "/save")
+	 * 
+	 * @ResponseBody public ResponseEntity<?> saveAssesseProfile(@RequestBody
+	 * AssessmentAnswerInfo assessmentAnswerInfo) {
+	 * log.info("Save Assessment Answers based on user request"); ResponseEntity<?>
+	 * responseEntity = null;
+	 * 
+	 * if (null == assessmentAnswerInfo) {
+	 * log.error("Either missing assessmentAnswers"); throw new
+	 * RuntimeException("Required Assessment Answers to store in database"); }
+	 * 
+	 * boolean flag = assessmentService.saveAssessmentAnswers(assessmentAnswerInfo);
+	 * 
+	 * if (flag) { responseEntity = new ResponseEntity<Object>(flag,
+	 * HttpStatus.CREATED); } else { responseEntity = new ResponseEntity<Object>
+	 * ("Unable to save the assessment answers for questionnaire",
+	 * HttpStatus.INTERNAL_SERVER_ERROR); }
+	 * 
+	 * return responseEntity; }
+	 */
+
+	@ApiOperation(value = "This API save answers given by assesse for the questionnaire.", notes = "This API save answers given by assesse for the questionnaire.", response = Provider.class)
+
 	@ApiResponses({
-			@ApiResponse(code = 200, message = "Successfully Saved Assessment Answers in DataStore", response = String.class),
+
+			@ApiResponse(code = 200, message = "Successfully Saved Assessment Answers in DataStore", response = Provider.class),
+
 			@ApiResponse(code = 404, message = "Invalid", response = Object.class),
+
 			@ApiResponse(code = 500, message = "Internal error", response = Object.class) })
-	@PostMapping(value = "/save")
+
+	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
+
 	@ResponseBody
-	public ResponseEntity<?> saveAssesseProfile(@RequestBody AssessmentAnswerInfo assessmentAnswerInfo) {
+
+	public ResponseEntity<Object> saveAssesseProfile(@RequestBody AssessmentAnswerInfo assessmentAnswerInfo) {
+
 		log.info("Save Assessment Answers based on user request");
-		ResponseEntity<?> responseEntity = null;
+
+		ResponseEntity<Object> responseEntity = null;
+		
+		AssessmentScoreAndProviders assessmentScoreAndProviders = new AssessmentScoreAndProviders();
+
+		List<Provider_Model> providersList = new ArrayList<>();
 
 		if (null == assessmentAnswerInfo) {
+
 			log.error("Either missing assessmentAnswers");
+
 			throw new RuntimeException("Required Assessment Answers to store in database");
+
 		}
 
-		boolean flag = assessmentService.saveAssessmentAnswers(assessmentAnswerInfo);
+		assessmentScoreAndProviders = assessmentService.saveAssessmentAnswers(assessmentAnswerInfo);
 
-		if (flag) {
-			responseEntity = new ResponseEntity<Object>(flag, HttpStatus.CREATED);
+		if (null != assessmentScoreAndProviders) {
+
+			responseEntity = new ResponseEntity<Object>(assessmentScoreAndProviders, HttpStatus.OK);
+
 		} else {
+
 			responseEntity = new ResponseEntity<Object>("Unable to save the assessment answers for questionnaire",
+
 					HttpStatus.INTERNAL_SERVER_ERROR);
+
 		}
 
 		return responseEntity;
+
 	}
 
 }
