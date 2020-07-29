@@ -4,7 +4,7 @@ public class Profile_BiomedicalAuthorityInfo {
 
 	private String biomedicalAuthorityCode;
 
-	private long profileCode;
+	private String profileCode;
 
 	private long profileZipCode;
 
@@ -24,13 +24,13 @@ public class Profile_BiomedicalAuthorityInfo {
 
 	}
 
-	public long getProfileCode() {
+	public String getProfileCode() {
 
 		return profileCode;
 
 	}
 
-	public void setProfileCode(long profileCode) {
+	public void setProfileCode(String profileCode) {
 
 		this.profileCode = profileCode;
 

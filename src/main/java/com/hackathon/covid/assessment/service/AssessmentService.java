@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 
@@ -247,6 +248,7 @@ public class AssessmentService {
 					.save(convertAssessProfileToEntity(assesseProfile, assesseProfileEntity));
 
 			assessment_Questionnaire.setProfileId(assesseProfileEntity.getProfile_Code());
+			assessment_Questionnaire.setFirstName(assesseProfileEntity.getFirst_Name());
 
 			assessment_Questionnaire.setCountryCode(assesseProfile.getCountryCode());
 
@@ -311,8 +313,10 @@ public class AssessmentService {
 	}
 
 	private Profile convertAssessProfileToEntity(AssesseProfile assesseProfile, Profile assesseProfileEntity) {
+		
+		UUID uuid = UUID.randomUUID();
 
-		assesseProfileEntity.setProfile_Code(new java.util.Random().nextLong());
+		assesseProfileEntity.setProfile_Code(uuid.toString());
 
 		assesseProfileEntity.setFirst_Name(assesseProfile.getAssesseFirstName());
 

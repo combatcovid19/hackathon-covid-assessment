@@ -18,7 +18,7 @@ public class Profile implements Serializable {
 
 	@Id
 	@Column(name="Profile_Code")
-	private long profile_Code;
+	private String profile_Code;
 
 	@Column(name="Assessment_Score")
 	private BigDecimal assessment_Score;
@@ -85,11 +85,11 @@ public class Profile implements Serializable {
 	public Profile() {
 	}
 
-	public long getProfile_Code() {
+	public String getProfile_Code() {
 		return this.profile_Code;
 	}
 
-	public void setProfile_Code(long profile_Code) {
+	public void setProfile_Code(String profile_Code) {
 		this.profile_Code = profile_Code;
 	}
 

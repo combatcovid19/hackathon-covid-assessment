@@ -29,6 +29,6 @@ public interface AssesseProfileRepo extends JpaRepository<Profile, Long> {
 	@Query(value = "update dbo.Profile set Assessment_Score =:assessmentScore where Profile_Code =:profileCode ", nativeQuery = true)
 
 	int setAssessmentScore(@Param("assessmentScore") BigDecimal assessmentScore,
-			@Param("profileCode") long profileCode);
+			@Param("profileCode") String profileCode);
 
 }

@@ -19,7 +19,8 @@ public class Assessment_Questionnaire {
 
 	String countryCode;
 	String biomedical_Authority_Code;	
-	Long profileId;
+	String profileId;
+	String firstName;
 
 	Set<Assessment_Question_Model> assessmentQuestions = new HashSet<>();
 
