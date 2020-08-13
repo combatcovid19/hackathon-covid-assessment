@@ -1,51 +1,34 @@
 package com.hackathon.covid.assessment.model;
 
 public class Profile_BiomedicalAuthorityInfo {
+private String biomedicalAuthorityCode;
+private long profileCode;
+private long profileZipCode;
 
-	private String biomedicalAuthorityCode;
+public Profile_BiomedicalAuthorityInfo() {
+}
 
-	private String profileCode;
+public String getBiomedicalAuthorityCode() {
+return biomedicalAuthorityCode;
+}
 
-	private long profileZipCode;
+public void setBiomedicalAuthorityCode(String biomedicalAuthorityCode) {
+this.biomedicalAuthorityCode = biomedicalAuthorityCode;
+}
 
-	public Profile_BiomedicalAuthorityInfo() {
+public long getProfileCode() {
+return profileCode;
+}
 
-	}
+public void setProfileCode(long profileCode) {
+this.profileCode = profileCode;
+}
 
-	public String getBiomedicalAuthorityCode() {
+public long getProfileZipCode() {
+return profileZipCode;
+}
 
-		return biomedicalAuthorityCode;
-
-	}
-
-	public void setBiomedicalAuthorityCode(String biomedicalAuthorityCode) {
-
-		this.biomedicalAuthorityCode = biomedicalAuthorityCode;
-
-	}
-
-	public String getProfileCode() {
-
-		return profileCode;
-
-	}
-
-	public void setProfileCode(String profileCode) {
-
-		this.profileCode = profileCode;
-
-	}
-
-	public long getProfileZipCode() {
-
-		return profileZipCode;
-
-	}
-
-	public void setProfileZipCode(long profileZipCode) {
-
-		this.profileZipCode = profileZipCode;
-
-	}
-
+public void setProfileZipCode(long profileZipCode) {
+this.profileZipCode = profileZipCode;
+}
 }

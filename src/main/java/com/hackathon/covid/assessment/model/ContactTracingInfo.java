@@ -1,7 +1,6 @@
 package com.hackathon.covid.assessment.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -15,13 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Component
-public class Assessment_Questionnaire {
-
-String countryCode;
-String biomedical_Authority_Code;
-Long profileId;
-
-Set<Assessment_Question_Model> assessmentQuestions = new HashSet<>();
+public class ContactTracingInfo {
+private List<ContactTracer> contactTracerList;
+private Long profileCode;
 
 }
 

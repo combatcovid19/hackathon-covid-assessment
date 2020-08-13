@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Component
 public class AssessmentAnswerInfo {
-	
-	private List<AssessmentAnswer> assessmentAnswers;	
-	private Profile_BiomedicalAuthorityInfo profileAndBiomedicalAuthorityInfo;
+private List<AssessmentAnswer> assessmentAnswers;
+private Profile_BiomedicalAuthorityInfo profileAndBiomedicalAuthorityInfo;
 
 }
+
